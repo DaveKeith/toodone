@@ -157,10 +157,11 @@ module TooDone
       list = TooDone::List.find_or_create_by(list_name: list_name)
       puts "Display in reverse order? ('y' for yes)"
       choice = gets.chomp.downcase
-      tasks = TooDone::Task.where(list_name: list_name)
+      tasks = TooDone::Task.where(list_name: list_name).order(id: :asc)
       if choice == 'y'
         tasks = TooDone::Task.where(list_name: list_name).order(id: :desc)
       end
+      tasks
       # find or create the right todo list
       # show the tasks ordered as requested, default to reverse order (recently entered first)
     end
